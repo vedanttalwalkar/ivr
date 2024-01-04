@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "237705871082",
+    "project_id": "ivrapp-a8748",
+    "storage_bucket": "ivrapp-a8748.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:237705871082:android:daa0dc5392aac2465f2193",
+        "android_client_info": {
+          "package_name": "com.example.ivrapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2IEgcZqm9A53VhRup2IWqN1V-aykkAQo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
