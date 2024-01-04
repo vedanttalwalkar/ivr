@@ -16,5 +16,12 @@ def hello():
     return {"message":"hoi"}
 
 
+if __name__ == '__main__':
+    from pyngrok import ngrok
+    port = 5000
+    public_url = ngrok.connect(port, bind_tls=True).public_url
+    print(public_url+'/get-ocr')
+
+    app.run(port=port)
     
 

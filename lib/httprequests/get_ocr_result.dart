@@ -11,11 +11,12 @@ import 'package:ivrapp/widgets/showSnackBar.dart';
 Future<void> getOcrResult(
     {required String prescriptionUrl, required BuildContext context}) async {
   try {
-    http.Response res = await http.get(Uri.parse('http://127.0.0.1:5000/get-ocr'),
-        // body: jsonEncode({
-        //   "url": prescriptionUrl,
-        // }),
-        );
+    http.Response res = await http.post(
+      Uri.parse('https://b9c3-103-117-185-144.ngrok-free.app/get-ocr'),
+      body: jsonEncode({
+        "url": prescriptionUrl,
+      }),
+    );
 
     httpErrorhandle(
         context: context,
@@ -24,7 +25,7 @@ Future<void> getOcrResult(
           print('result will be');
           print(jsonDecode(res.body));
         });
-  }on SocketException catch (err) {
+  } on SocketException catch (err) {
     print(err.toString());
     showSnackBar(context, err.toString());
   }
