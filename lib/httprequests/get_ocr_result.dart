@@ -11,7 +11,7 @@ import 'package:ivrapp/widgets/showSnackBar.dart';
 Future<void> getOcrResult(
     {required String prescriptionUrl, required BuildContext context}) async {
   try {
-    http.Response res = await http.get(Uri.parse('http://192.168.0.106:5000/get-ocr'),
+    http.Response res = await http.get(Uri.parse('http://127.0.0.1:5000/get-ocr'),
         // body: jsonEncode({
         //   "url": prescriptionUrl,
         // }),
