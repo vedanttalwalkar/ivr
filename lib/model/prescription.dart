@@ -4,8 +4,8 @@ class Prescription
 {
   final String userid;
   final String prescriptionUrl;
-  final DateTime uploadDate;
-  final String medicineName;
+  final String uploadDate;
+  final List medicines;
   final String id;
   final String fileName;
 
@@ -13,7 +13,7 @@ class Prescription
       {required this.userid,
         required this.prescriptionUrl,
         required this.uploadDate,
-        required this.medicineName,
+        required this.medicines,
         required this.id,
         required this.fileName,
       });
@@ -25,7 +25,7 @@ class Prescription
         userid: snapshot["userid"],
         prescriptionUrl: snapshot["prescriptionUrl"],
         uploadDate: snapshot["uploadDate"],
-        medicineName: snapshot["medicineName"],
+        medicines: snapshot["medicines"],
         id: snapshot["id"],
         fileName: snapshot["fileName"],
     );
@@ -35,7 +35,7 @@ class Prescription
     "userid": userid,
     "prescriptionUrl": prescriptionUrl,
     "uploadDate": uploadDate,
-    "medicineName": medicineName,
+    "medicines": medicines,
     "id": id,
     "fileName": fileName,
   };

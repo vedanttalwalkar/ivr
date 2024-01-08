@@ -47,6 +47,7 @@ dependencies:
   rflutter_alert: ^2.0.7
   http: ^1.1.2
   dio: ^5.4.0
+  dotted_border: ^2.1.0
 
 dev_dependencies:
   flutter_test:

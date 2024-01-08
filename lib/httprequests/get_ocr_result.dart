@@ -1,31 +1,39 @@
 import 'dart:convert';
-import 'dart:io';
-import 'package:dio/dio.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:ivrapp/constants.dart';
 import 'package:ivrapp/widgets/http_error_handling.dart';
 import 'package:ivrapp/widgets/showSnackBar.dart';
 
-Future<void> getOcrResult(
+Future<List<String>> getOcrResult(
     {required String prescriptionUrl, required BuildContext context}) async {
+  String res = 'Success';
+  List<String> medicines=[];
   try {
-    http.Response res = await http.get(Uri.parse('http://192.168.0.106:5000/get-ocr'),
-        // body: jsonEncode({
-        //   "url": prescriptionUrl,
-        // }),
-        );
+    http.Response res = await http.post(
+      Uri.parse('$uri/get-ocr'),
+      body: jsonEncode({
+        "url": prescriptionUrl,
+      }),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
 
     httpErrorhandle(
         context: context,
         res: res,
-        onSuccess: () {
-          print('result will be');
-          print(jsonDecode(res.body));
+        onSuccess: () async {
+          for (int i=0;i<jsonDecode(res.body)['message'].length;i++)
+          {
+            medicines.add(jsonDecode(res.body)['message'][i]);
+
+          }
+
         });
-  }on SocketException catch (err) {
-    print(err.toString());
+  } catch (err) {
+    res = err.toString();
     showSnackBar(context, err.toString());
   }
+  return medicines;
 }

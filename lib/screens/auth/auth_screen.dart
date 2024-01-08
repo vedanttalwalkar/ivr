@@ -45,7 +45,7 @@ class _AuthScreenState extends State<AuthScreen> {
         password: _passwordcontroller.text.trim());
 
     if (res == 'Login Successful') {
-      Navigator.pushNamed(context, HomeScreen.routeName);
+      Navigator.pushReplacementNamed(context, HomeScreen.routeName);
     } else {
       showSnackBar(context, res);
     }

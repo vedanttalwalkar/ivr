@@ -1,9 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
-import 'dart:io';
 
-import 'package:ivrapp/pick_file.dart';
 
 class FirebaseStorageMethods {
   Future<String> uploadtoFirestorage({required BuildContext context,required Map<String,dynamic> filedetails}) async {

@@ -4,3 +4,11 @@ python-dotenv
 flask
 flask-cors
 pytesseract
+langchain
+accelerate
+bitsandbytes
+transformers
+sentence_transformers
+faiss_cpu
+chainlit
+huggingface_hub

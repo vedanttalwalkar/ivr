@@ -61,7 +61,7 @@ class Pickfile {
         ],
       );
       if (croppedFile != null) {
-        filedetails['file'] = File(croppedFile!.path);
+        filedetails['file'] = File(croppedFile.path);
        // filedetails['file']=croppedFile;
       }
 

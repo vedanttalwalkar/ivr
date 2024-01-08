@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:ivrapp/model/user.dart';
 import 'package:ivrapp/providers/user_provider.dart';
+import 'package:ivrapp/widgets/showSnackBar.dart';
 import 'package:provider/provider.dart';
 class AuthServices
 {
@@ -50,18 +51,21 @@ class AuthServices
 
 
 
-    }on FirebaseAuthException catch(e)
-    {
+    }on FirebaseAuthException {
       res='Invalid Credentials!!';
     }
     return res;
   }
-  Future<ModelUser> getUserDetails() async {
+  Future<void> getUserDetails({required BuildContext context}) async {
     User currentUser = _auth.currentUser!;
-    DocumentSnapshot snap =
-    await _firestore.collection('users').doc(currentUser.uid).get();
-    print('sssssssss' + snap['email']);
-    return ModelUser.fromSnap(snap);
+    try
+    {
+      DocumentSnapshot snap =
+      await _firestore.collection('users').doc(currentUser.uid).get();
+      Provider.of<UserProvider>(context,listen: false).getUserDetails(ModelUser.fromSnap(snap));
+    }catch(err){showSnackBar(context, err.toString());}
+
+
   }
 
 

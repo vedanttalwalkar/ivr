@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ivrapp/constants.dart';
 import 'package:ivrapp/pick_file.dart';
+import 'package:ivrapp/screens/extracted_med_list/extracted-med-list.dart';
 import 'package:ivrapp/storage_methods/firestore_methods.dart';
-import 'package:ivrapp/storage_methods/store_prescriptions.dart';
 import 'package:ivrapp/widgets/custom_button.dart';
 
 class CropImageScreen extends StatefulWidget {
@@ -18,18 +18,21 @@ class _CropImageScreenState extends State<CropImageScreen> {
   String url = '';
   bool isLoading = false;
   Map<String, dynamic> filedetails = {};
-  void addpdf() async {
+  List<String> medicines=[];
+
+
+  void addPdf() async {
     setState(() {
       isLoading = true;
     });
 
-    await FirestoreMethods().uploadPrescriptionDetails(
+    medicines=await FirestoreMethods().uploadPrescriptionDetails(
         context: context,
         filedetails: filedetails.isNotEmpty ? filedetails : widget.filedetails);
     setState(() {
       isLoading = false;
     });
-    Navigator.pop(context);
+    Navigator.pushNamed(context, MedicineList.routeName,arguments: medicines);
   }
 
   void getCroppedImage() async {
@@ -77,8 +80,8 @@ class _CropImageScreenState extends State<CropImageScreen> {
                 : CustomButton(
                     width: double.infinity,
                     callback: () {
-                      addpdf();
-                      
+                      addPdf();
+
                     },
                     buttontitle: 'Extract Medicines list')
           ],

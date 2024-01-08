@@ -3,9 +3,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ivrapp/constants.dart';
+import 'package:ivrapp/providers/prescription_provider.dart';
 import 'package:ivrapp/providers/user_provider.dart';
 import 'package:ivrapp/routes.dart';
 import 'package:ivrapp/screens/auth/auth_screen.dart';
+import 'package:ivrapp/screens/extracted_med_list/extracted-med-list.dart';
+import 'package:ivrapp/widgets/welcome.dart';
 import 'package:provider/provider.dart';
 import 'screens/home/home_screen.dart';
 
@@ -37,11 +40,15 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => PrescriptionProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+          appBarTheme: AppBarTheme().copyWith(
+            color: greenColor
+          ),
+          colorScheme: ColorScheme.fromSeed(seedColor: greenColor),
           useMaterial3: true,
         ),
         onGenerateRoute: (settings) => getRoutes(settings),
@@ -65,7 +72,7 @@ class MyApp extends StatelessWidget {
             {
               return const Center(child: CircularProgressIndicator(color: greenColor,),);
             }
-            return AuthScreen();
+            return WelcomeScreen();
           },
         ),
       ),
