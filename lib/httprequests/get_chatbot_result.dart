@@ -1,7 +1,7 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:ivrapp/constants.dart';
 import 'package:ivrapp/widgets/http_error_handling.dart';
 import 'package:ivrapp/widgets/showSnackBar.dart';
 
@@ -12,7 +12,7 @@ class ChatbotResult
     String reply='Success';
     try
     {
-      http.Response res = await http.post(Uri.parse('https://9ea9-103-117-185-144.ngrok-free.app/chatbot'),
+      http.Response res = await http.post(Uri.parse('$uri/chatbot'),
         body: jsonEncode({
           'userinput': userinput,
         }),

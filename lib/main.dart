@@ -6,8 +6,6 @@ import 'package:ivrapp/constants.dart';
 import 'package:ivrapp/providers/prescription_provider.dart';
 import 'package:ivrapp/providers/user_provider.dart';
 import 'package:ivrapp/routes.dart';
-import 'package:ivrapp/screens/auth/auth_screen.dart';
-import 'package:ivrapp/screens/extracted_med_list/extracted-med-list.dart';
 import 'package:ivrapp/widgets/welcome.dart';
 import 'package:provider/provider.dart';
 import 'screens/home/home_screen.dart';
@@ -45,32 +43,36 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          appBarTheme: AppBarTheme().copyWith(
-            color: greenColor
-          ),
+          floatingActionButtonTheme: FloatingActionButtonThemeData(foregroundColor: Colors.black),
+          iconButtonTheme: IconButtonThemeData(
+              style: ButtonStyle(
+                  iconColor: MaterialStateProperty.all<Color>(whiteColor))),
+          iconTheme: IconThemeData().copyWith(color: whiteColor),
+          appBarTheme: AppBarTheme().copyWith(color: greenColor),
           colorScheme: ColorScheme.fromSeed(seedColor: greenColor),
           useMaterial3: true,
         ),
         onGenerateRoute: (settings) => getRoutes(settings),
-        home: StreamBuilder
-          (
+        home: StreamBuilder(
           stream: FirebaseAuth.instance.authStateChanges(),
-          builder: (context,snapshot)
-          {
-            if(snapshot.connectionState==ConnectionState.active)
-            {
-              if(snapshot.hasData)
-              {
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.active) {
+              if (snapshot.hasData) {
                 return HomeScreen();
-              }
-              else if(snapshot.hasError)
-              {
-                return Scaffold(body: Center(child: Text('${snapshot.error}'),),);
+              } else if (snapshot.hasError) {
+                return Scaffold(
+                  body: Center(
+                    child: Text('${snapshot.error}'),
+                  ),
+                );
               }
             }
-            if(snapshot.connectionState==ConnectionState.waiting)
-            {
-              return const Center(child: CircularProgressIndicator(color: greenColor,),);
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(
+                  color: greenColor,
+                ),
+              );
             }
             return WelcomeScreen();
           },
@@ -79,5 +81,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-

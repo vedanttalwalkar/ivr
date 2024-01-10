@@ -7,7 +7,11 @@ showAlert(
     required String title,
     required VoidCallback callback}) {
   return Alert(
-    closeIcon: Icon(Icons.close,color: greenColor,size: 40,),
+    closeIcon: Icon(
+      Icons.close,
+      color: greenColor,
+      size: 40,
+    ),
     context: context,
     image: Image.asset(
       'assets/bulb.png',

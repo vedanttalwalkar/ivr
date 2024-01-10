@@ -8,7 +8,7 @@ class FirebaseStorageMethods {
     final FirebaseStorage _storage = FirebaseStorage.instance;
     final User _user=FirebaseAuth.instance.currentUser!;
     String filename = filedetails['name'];
-    print('on image storage'+_user.uid+'filename'+filedetails['name']);
+
     Reference _ref =
         _storage.ref().child('prescriptions/').child(_user.uid).child(filename);
     UploadTask uploadTask = _ref.putFile(filedetails['file']);
