@@ -5,25 +5,31 @@ import 'package:ivrapp/model/user.dart';
 import 'package:ivrapp/providers/user_provider.dart';
 import 'package:ivrapp/widgets/showSnackBar.dart';
 import 'package:provider/provider.dart';
-class AuthServices
-{
-  final FirebaseAuth _auth=FirebaseAuth.instance;
-  final FirebaseFirestore _firestore=FirebaseFirestore.instance;
-  Future<String> signUpUser({required String username,required String email,required String password})async
-  {
-    String res='User created successfully.Please Sign-In with same credentials';
 
+class AuthServices {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  Future<String> signUpUser(
+      {required String username,
+      required String email,
+      required String password}) async {
+    String res =
+        'User created successfully.Please Sign-In with same credentials';
 
-
-    try
-    {
-      UserCredential cred=await _auth.createUserWithEmailAndPassword(email: email, password: password);
-      final ModelUser _user=ModelUser(username: username, email: email, userid: cred.user!.uid, phoneNumber: '', address: '');
-     await _firestore.collection('users').doc(cred.user!.uid).set(_user.toMap());
-
-    }
-    on FirebaseAuthException catch(e)
-    {
+    try {
+      UserCredential cred = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      final ModelUser _user = ModelUser(
+          username: username,
+          email: email,
+          userid: cred.user!.uid,
+          phoneNumber: '',
+          address: '');
+      await _firestore
+          .collection('users')
+          .doc(cred.user!.uid)
+          .set(_user.toMap());
+    } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
         res = 'There already exists an account with the given email address';
       } else if (e.code == 'invalid-email') {
@@ -33,41 +39,30 @@ class AuthServices
       }
     }
 
-
-
-
-
     return res;
-
   }
 
-
-  Future<String> loginUser({required String email,required String password})async
-  {
-    String res='Login Successful';
-    try
-    {
-      UserCredential cred=await _auth.signInWithEmailAndPassword(email: email, password: password);
-
-
-
-    }on FirebaseAuthException {
-      res='Invalid Credentials!!';
+  Future<String> loginUser(
+      {required String email, required String password}) async {
+    String res = 'Login Successful';
+    try {
+      UserCredential cred = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+    } on FirebaseAuthException {
+      res = 'Invalid Credentials!!';
     }
     return res;
   }
+
   Future<void> getUserDetails({required BuildContext context}) async {
     User currentUser = _auth.currentUser!;
-    try
-    {
+    try {
       DocumentSnapshot snap =
-      await _firestore.collection('users').doc(currentUser.uid).get();
-      Provider.of<UserProvider>(context,listen: false).getUserDetails(ModelUser.fromSnap(snap));
-    }catch(err){showSnackBar(context, err.toString());}
-
-
+          await _firestore.collection('users').doc(currentUser.uid).get();
+      Provider.of<UserProvider>(context, listen: false)
+          .getUserDetails(ModelUser.fromSnap(snap));
+    } catch (err) {
+      showSnackBar(context, err.toString());
+    }
   }
-
-
-
 }

@@ -44,10 +44,10 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           floatingActionButtonTheme: FloatingActionButtonThemeData(foregroundColor: Colors.black),
-          iconButtonTheme: IconButtonThemeData(
-              style: ButtonStyle(
-                  iconColor: MaterialStateProperty.all<Color>(whiteColor))),
-          iconTheme: IconThemeData().copyWith(color: whiteColor),
+          // iconButtonTheme: IconButtonThemeData(
+          //     style: ButtonStyle(
+          //         iconColor: MaterialStateProperty.all<Color>(whiteColor))),
+          //iconTheme: IconThemeData().copyWith(color: whiteColor),
           appBarTheme: AppBarTheme().copyWith(color: greenColor),
           colorScheme: ColorScheme.fromSeed(seedColor: greenColor),
           useMaterial3: true,

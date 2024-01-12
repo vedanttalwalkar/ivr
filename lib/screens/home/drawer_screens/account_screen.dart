@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ivrapp/constants.dart';
-import 'package:ivrapp/screens/home/drawer_screens/services/DrawerServices.dart';
-
-import '../../../model/prescription.dart';
+import 'package:ivrapp/model/user.dart';
+import 'package:ivrapp/providers/user_provider.dart';
+import 'package:provider/provider.dart';
 
 class MyAccount extends StatefulWidget {
   static const routeName = '/account-page';
@@ -15,6 +14,12 @@ class MyAccount extends StatefulWidget {
 class _MyAccountState extends State<MyAccount> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+
+    );
   }
 }
+
+
+
+

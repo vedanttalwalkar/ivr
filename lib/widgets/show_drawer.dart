@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ivrapp/model/user.dart';
 import 'package:ivrapp/screens/home/drawer_screens/account_screen.dart';
 import 'package:ivrapp/screens/home/drawer_screens/prescriptions_screen.dart';
 
@@ -7,12 +6,16 @@ import '../constants.dart';
 
 showDrawer({required BuildContext context}) {
   void goToaccount() {
+    Navigator.of(context).pop();
     Navigator.pushNamed(context, MyAccount.routeName);
   }
 
   void goToPrescriptions()
   {
+    Navigator.of(context).pop();
     Navigator.pushNamed(context, PrescriptionScreen.routeName);
+
+
   }
 
 
@@ -86,7 +89,7 @@ class DrawerChild extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             (iconimage.isEmpty)
-                ? Icon(Icons.shopping_bag,size: 30,)
+                ? Icon(Icons.shopping_bag,size: 30,color: Colors.black,)
                 : Container(
                     width: 30,
                     height: 30,

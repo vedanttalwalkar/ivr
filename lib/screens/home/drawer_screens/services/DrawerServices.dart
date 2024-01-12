@@ -14,7 +14,7 @@ class DrawerServices {
 
       QuerySnapshot snapshot = await _firestore
           .collection('prescriptions')
-          .where('userid', isEqualTo: 'd8Uhhs2hfYVRrdklPMVpsLQ0a1o1')
+          .where('userid', isEqualTo: _auth.currentUser!.uid)
           .get();
 
 
@@ -30,6 +30,6 @@ class DrawerServices {
       showSnackBar(context, err.toString());
     }
 
-    return prescriptions!;
+    return prescriptions;
   }
 }

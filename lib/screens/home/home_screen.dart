@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ivrapp/constants.dart';
 import 'package:ivrapp/model/user.dart';
-import 'package:ivrapp/pick_file.dart';
 import 'package:ivrapp/providers/user_provider.dart';
 import 'package:ivrapp/screens/auth/services/auth_services.dart';
 import 'package:ivrapp/screens/chatscreen/chatscreen.dart';
-import 'package:ivrapp/screens/crop_image/crop_image_screen.dart';
-import 'package:ivrapp/widgets/showAlert.dart';
 import 'package:ivrapp/widgets/show_drawer.dart';
 import 'package:provider/provider.dart';
 

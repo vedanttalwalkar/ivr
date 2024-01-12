@@ -5,6 +5,7 @@ import 'package:ivrapp/screens/auth/auth_screen.dart';
 import 'package:ivrapp/screens/chatscreen/chatscreen.dart';
 import 'package:ivrapp/screens/extracted_med_list/extracted-med-list.dart';
 import 'package:ivrapp/screens/home/drawer_screens/prescriptions_screen.dart';
+import 'package:ivrapp/screens/home/drawer_screens/widgets/individual_prescription.dart';
 import 'package:ivrapp/screens/home/home_screen.dart';
 import 'package:ivrapp/screens/crop_image/crop_image_screen.dart';
 
@@ -40,6 +41,11 @@ Route getRoutes(RouteSettings routeSettings) {
     case PrescriptionScreen.routeName:
       return MaterialPageRoute(builder: (context) {
         return  PrescriptionScreen();
+      });
+    case IndividualPrescriptionPage.routeName:
+      return MaterialPageRoute(builder: (context) {
+        var prescription=routeSettings.arguments as Prescription;
+        return  IndividualPrescriptionPage(prescription: prescription);
       });
     default:
       return MaterialPageRoute(builder: (context) {
