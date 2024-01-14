@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ivrapp/model/user.dart';
-import 'package:ivrapp/providers/user_provider.dart';
-import 'package:provider/provider.dart';
 
 class MyAccount extends StatefulWidget {
   static const routeName = '/account-page';

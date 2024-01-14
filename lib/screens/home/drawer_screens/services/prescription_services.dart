@@ -4,9 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:ivrapp/model/prescription.dart';
 import 'package:ivrapp/widgets/showSnackBar.dart';
 
-class DrawerServices {
+class PrescriptionServices {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
   Future<List<Prescription>> getUserPrescriptions(
       {required BuildContext context}) async {
     List<Prescription> prescriptions=[];

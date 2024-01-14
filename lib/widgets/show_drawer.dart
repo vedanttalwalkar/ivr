@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ivrapp/screens/home/drawer_screens/account_screen.dart';
 import 'package:ivrapp/screens/home/drawer_screens/prescriptions_screen.dart';
+import 'package:ivrapp/screens/home/drawer_screens/widgets/my_orders_screen.dart';
 
 import '../constants.dart';
 
@@ -16,6 +17,11 @@ showDrawer({required BuildContext context}) {
     Navigator.pushNamed(context, PrescriptionScreen.routeName);
 
 
+  }
+
+  void goToMyOrders() {
+    Navigator.of(context).pop();
+    Navigator.pushNamed(context, MyOrdersScreen.routeName);
   }
 
 
@@ -50,7 +56,7 @@ showDrawer({required BuildContext context}) {
                     ),
                     DrawerChild(
                       title: 'Your orders',
-                      callback: () => goToaccount(),
+                      callback: () => goToMyOrders(),
                       iconimage: '',
                     ),
                     DrawerChild(

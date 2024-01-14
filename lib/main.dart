@@ -16,13 +16,13 @@ void main() async {
   if (kIsWeb) {
     await Firebase.initializeApp(
         options: const FirebaseOptions(
-            apiKey: "AIzaSyBZQTMD7h4lMIt8BSddik1vhXhdNziahxk",
-            authDomain: "insta-clone-33281.firebaseapp.com",
-            projectId: "insta-clone-33281",
-            storageBucket: "insta-clone-33281.appspot.com",
-            messagingSenderId: "744133681799",
-            appId: "1:744133681799:web:9436a7e09c44df97ab4e22",
-            measurementId: "G-QC35B9BP71"));
+            apiKey: "AIzaSyClXFIDLgvrsqETUmYP3WiuQS-V5YEi4ig",
+            authDomain: "ivrapp-a8748.firebaseapp.com",
+            projectId: "ivrapp-a8748",
+            storageBucket: "ivrapp-a8748.appspot.com",
+            messagingSenderId: "237705871082",
+            appId: "1:237705871082:web:a3144e707c4b3b3e5f2193",
+            measurementId: "G-Q9L4PWVWMY"));
   }
   await Firebase.initializeApp();
 
@@ -43,7 +43,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          floatingActionButtonTheme: FloatingActionButtonThemeData(foregroundColor: Colors.black),
+          floatingActionButtonTheme:
+              FloatingActionButtonThemeData(foregroundColor: Colors.black),
           // iconButtonTheme: IconButtonThemeData(
           //     style: ButtonStyle(
           //         iconColor: MaterialStateProperty.all<Color>(whiteColor))),

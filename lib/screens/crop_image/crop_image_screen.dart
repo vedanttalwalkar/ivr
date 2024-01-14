@@ -52,7 +52,7 @@ class _CropImageScreenState extends State<CropImageScreen> {
               },
               child: Text(
                 'Retake Photo',
-                style: TextStyle(color: greenColor, fontSize: 20),
+                style: TextStyle(color: whiteColor, fontSize: 20),
               ))
         ],
       ),

@@ -18,7 +18,10 @@ class _PrescriptionGridState extends State<PrescriptionGrid> {
       required Prescription prescription}) async {
     await FirebaseStorageMethods()
         .deleteFromFirestorage(context: context, prescription: prescription);
-    setState(() {});
+    setState(()
+    {
+      widget.prescriptions.remove(prescription);
+    });
   }
   
   void goToprescriptionDetails({required BuildContext context,required Prescription prescription})

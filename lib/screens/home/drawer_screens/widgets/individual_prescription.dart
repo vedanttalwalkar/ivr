@@ -27,55 +27,57 @@ class IndividualPrescriptionPage extends StatelessWidget {
           ),
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          DottedBorder(
-            dashPattern: [6, 3, 6, 3],
-            borderPadding: EdgeInsets.all(10),
-            borderType: BorderType.RRect,
-            radius: Radius.circular(15),
-            child: Container(
-              width: double.infinity,
-              height: MediaQuery.of(context).size.height / 4,
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Image.network(
-                  prescription.prescriptionUrl,
-                  fit: BoxFit.fitHeight,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            DottedBorder(
+              dashPattern: [6, 3, 6, 3],
+              borderPadding: EdgeInsets.all(10),
+              borderType: BorderType.RRect,
+              radius: Radius.circular(15),
+              child: Container(
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height / 4,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Image.network(
+                    prescription.prescriptionUrl,
+                    fit: BoxFit.fitHeight,
+                  ),
                 ),
               ),
             ),
-          ),
-          Container(
-            margin: EdgeInsets.all(10),
-            child: Text(
-              'Medicines ',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Text(
+                'Medicines ',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
             ),
-          ),
-          Container(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: prescription.medicines.map((e) {
-              return Padding(
-                padding: const EdgeInsets.all(10),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("   • ", style: TextStyle(fontSize: 18)),
-                    Expanded(
-                      child: Text(
-                        e,
-                        style: TextStyle(fontSize: 18),
+            Container(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: prescription.medicines.map((e) {
+                return Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("   • ", style: TextStyle(fontSize: 18)),
+                      Expanded(
+                        child: Text(
+                          e,
+                          style: TextStyle(fontSize: 18),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              );
-            }).toList(),
-          ))
-        ],
+                    ],
+                  ),
+                );
+              }).toList(),
+            ))
+          ],
+        ),
       ),
     );
   }
