@@ -22,6 +22,7 @@ class _AuthScreenState extends State<AuthScreen> {
   final TextEditingController _namecontroller = TextEditingController();
   final TextEditingController _emailcontroller = TextEditingController();
   final TextEditingController _passwordcontroller = TextEditingController();
+  bool isLoading = false;
   @override
   void dispose() {
     // TODO: implement dispose
@@ -32,18 +33,29 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   void createUser() async {
+    setState(() {
+      isLoading = true;
+    });
     res = await AuthServices().signUpUser(
         username: _namecontroller.text.trim(),
         email: _emailcontroller.text.trim(),
         password: _passwordcontroller.text.trim());
+    setState(() {
+      isLoading = false;
+    });
     showSnackBar(context, res);
   }
 
   void loginUser() async {
+    setState(() {
+      isLoading=true;
+    });
     res = await AuthServices().loginUser(
         email: _emailcontroller.text.trim(),
         password: _passwordcontroller.text.trim());
-
+    setState(() {
+      isLoading=false;
+    });
     if (res == 'Login Successful') {
       Navigator.pushReplacementNamed(context, HomeScreen.routeName);
     } else {
@@ -103,22 +115,35 @@ class _AuthScreenState extends State<AuthScreen> {
                                 hintText: 'Enter your password',
                                 controller: _passwordcontroller,
                               ),
-                              CustomButton(
-                                buttontitle: 'Sign Up',
-                                callback: () {
-                                  if (_signupkey.currentState!.validate()) {
-                                    if (_passwordcontroller.text
-                                            .trim()
-                                            .length >=
-                                        6) {
-                                      createUser();
-                                    } else {
-                                      showSnackBar(context,
-                                          'Password must be of more than 6 characters');
-                                    }
-                                  }
-                                },
-                              )
+                              (isLoading)
+                                  ? Container(
+                                      height: 48,
+                                      margin: EdgeInsets.all(8),
+                                      color: greenColor,
+                                      width: double.infinity,
+                                      child: Center(
+                                        child: const CircularProgressIndicator(
+                                          color: whiteColor,
+                                        ),
+                                      ),
+                                    )
+                                  : CustomButton(
+                                      buttontitle: 'Sign Up',
+                                      callback: () {
+                                        if (_signupkey.currentState!
+                                            .validate()) {
+                                          if (_passwordcontroller.text
+                                                  .trim()
+                                                  .length >=
+                                              6) {
+                                            createUser();
+                                          } else {
+                                            showSnackBar(context,
+                                                'Password must be of more than 6 characters');
+                                          }
+                                        }
+                                      },
+                                    )
                             ],
                           ),
                         )),
@@ -166,7 +191,17 @@ class _AuthScreenState extends State<AuthScreen> {
                                 hintText: 'Enter your password',
                                 controller: _passwordcontroller,
                               ),
-                              CustomButton(
+                              (isLoading)?Container(
+                                height: 48,
+                                margin: EdgeInsets.all(8),
+                                color: greenColor,
+                                width: double.infinity,
+                                child: Center(
+                                  child: const CircularProgressIndicator(
+                                    color: whiteColor,
+                                  ),
+                                ),
+                              ):CustomButton(
                                 buttontitle: 'Log in',
                                 callback: () {
                                   if (_signinkey.currentState!.validate()) {
@@ -187,7 +222,3 @@ class _AuthScreenState extends State<AuthScreen> {
     );
   }
 }
-
-
-
-

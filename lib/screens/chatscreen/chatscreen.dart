@@ -5,6 +5,7 @@ import 'package:ivrapp/httprequests/get_chatbot_result.dart';
 import 'package:ivrapp/screens/auth/auth_screen.dart';
 import 'package:ivrapp/screens/chatscreen/widgets/chattextfield.dart';
 import 'package:ivrapp/screens/chatscreen/widgets/messagebox.dart';
+import 'package:speech_to_text/speech_to_text.dart';
 
 class ChatScreen extends StatefulWidget {
   static const routeName = '/chat-screen';
@@ -17,10 +18,29 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _chatcontroller = TextEditingController();
   ScrollController _scrollController = ScrollController();
+  SpeechToText speechToText = SpeechToText();
   IconData icon = Icons.mic;
   bool fieldEmpty = true;
   String text = '';
   String reply = '';
+  bool isListening = false;
+  void activateMic() async {
+    if (!isListening) {
+      bool available = await speechToText.initialize();
+      if (available) {
+        setState(() {
+          isListening = true;
+          speechToText.listen(onResult: (res) {
+            setState(() {
+              _chatcontroller.text = res.recognizedWords;
+              fieldEmpty = false;
+            });
+          });
+        });
+      }
+    }
+  }
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -40,9 +60,11 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void getreply() async {
     setState(() {
-      userinput.add(MessageBox(text: '...',sender: 'bot'));
+      userinput.add(MessageBox(text: '...', sender: 'bot'));
+      scrolldown();
     });
-    reply=await ChatbotResult().getchatbotreult(context: context, userinput: text);
+    reply = await ChatbotResult()
+        .getchatbotreult(context: context, userinput: text);
     setState(() {
       userinput.removeLast();
       userinput.add(MessageBox(
@@ -50,31 +72,40 @@ class _ChatScreenState extends State<ChatScreen> {
         sender: 'bot',
       ));
     });
+    scrolldown();
   }
 
   List<MessageBox> userinput = [
     MessageBox(
-      text: 'Hello from bot!!',
+      text:
+          'Hello!!. You can ask me anything about medicines and their side-effects. I will try to answer them correctly',
       sender: 'bot',
     ),
-
   ];
 
-  void scrolldown()
-  {
+  void scrolldown() {
     if (_scrollController.hasClients) {
-      final position = _scrollController.position.maxScrollExtent;
-      _scrollController.jumpTo(position);
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        duration: Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(onPressed: (){signOut();}, icon: Icon(Icons.logout,color: whiteColor,))
+          IconButton(
+              onPressed: () {
+                signOut();
+              },
+              icon: Icon(
+                Icons.logout,
+                color: whiteColor,
+              ))
         ],
         leading: IconButton(
           onPressed: () {
@@ -102,6 +133,7 @@ class _ChatScreenState extends State<ChatScreen> {
           Row(
             children: [
               Expanded(
+                flex: 5,
                 child: CustomChatTextField(
                   onChanged: (newText) {
                     isFieldEmpty(newText);
@@ -111,37 +143,61 @@ class _ChatScreenState extends State<ChatScreen> {
                   keyboardType: TextInputType.text,
                 ),
               ),
-              IconButton(
-                  onPressed: fieldEmpty
-                      ? () {
-                          print('mic is on');
+              Expanded(
+                flex: 1,
+                child: GestureDetector(
+                  onTapUp: (det) {
+                    setState(() {
+                      isListening = false;
+                    });
+                    speechToText.stop();
+                  },
+                  onTapDown: fieldEmpty
+                      ? (det) async {
+                          activateMic();
                         }
-                      : () {
+                      : (det) {
                           setState(() {
                             text = _chatcontroller.text.trim();
                             userinput.add(MessageBox(text: text));
-
                             getreply();
-                            scrolldown();
                             _chatcontroller.clear();
                             fieldEmpty = true;
                             popKeyboard(context);
                           });
                         },
-                  icon: Icon(
-                    fieldEmpty ? Icons.mic : Icons.telegram_rounded,
-                    size: 40,
-                  ))
+                  child: CircleAvatar(
+                    radius: 25,
+                    backgroundColor: greenColor,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: (!fieldEmpty)
+                          ? Image.asset(
+                              'assets/telegram.png',
+                              fit: BoxFit.contain,
+                              height: 30,
+                              width: 30,
+                            )
+                          : Icon(
+                              Icons.mic,
+                              color: whiteColor,
+                              size: 35,
+                            ),
+                    ),
+                  ),
+                ),
+              )
             ],
           ),
         ],
       ),
     );
   }
-  void signOut()async
-  {
+
+  void signOut() async {
     await FirebaseAuth.instance.signOut();
-    Navigator.pushNamedAndRemoveUntil(context, AuthScreen.routeName, (route) => false);
+    Navigator.pushNamedAndRemoveUntil(
+        context, AuthScreen.routeName, (route) => false);
   }
 }
 

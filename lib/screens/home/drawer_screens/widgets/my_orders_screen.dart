@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ivrapp/constants.dart';
 import 'package:ivrapp/screens/home/drawer_screens/services/orders_services.dart';
-
 import '../../../../model/order.dart';
 
 class MyOrdersScreen extends StatefulWidget {
@@ -76,7 +75,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                   ),
                 )
               : Padding(
-                  padding: const EdgeInsets.all(15.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
                   child: ListView.builder(
                       shrinkWrap: false,
                       itemCount: orders.length,
@@ -115,76 +114,73 @@ class BuildOrdersList extends StatelessWidget {
     String date = convertDateToString(order.orderDate);
     String text =
         (order.id.length > 3) ? '${order.id.substring(0, 6)}...' : order.id;
-    return Padding(
-      padding: const EdgeInsets.only(right: 8.0, bottom: 10),
-      child: Container(
-        margin: EdgeInsets.only(bottom: 10),
-        padding: EdgeInsets.all(8),
-        width: double.infinity,
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-            border: Border.all(width: 1, color: Colors.grey)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  order.orderTitle,
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                ),
-                Expanded(child: SizedBox()),
-                Text(' id: ' + text),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: IntrinsicHeight(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Order Date',
-                          style: TextStyle(color: Colors.grey, fontSize: 18),
-                        ),
-                        Text(date)
-                      ],
-                    ),
-                    Expanded(
-                      child: VerticalDivider(
-                        indent: 10,
-                        color: Colors.grey,
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      padding: EdgeInsets.all(8),
+      width: double.infinity,
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+          border: Border.all(width: 1, color: Colors.grey)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                order.orderTitle,
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              ),
+              Expanded(child: SizedBox()),
+              Text(' id: ' + text),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: IntrinsicHeight(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Order Date',
+                        style: TextStyle(color: Colors.grey, fontSize: 18),
                       ),
+                      Text(date)
+                    ],
+                  ),
+                  Expanded(
+                    child: VerticalDivider(
+                      indent: 10,
+                      color: Colors.grey,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Schedule',
-                          style: TextStyle(color: Colors.grey, fontSize: 18),
-                        ),
-                        Expanded(child: SizedBox()),
-                        Text(date)
-                      ],
-                    ),
-                  ],
-                ),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Schedule',
+                        style: TextStyle(color: Colors.grey, fontSize: 18),
+                      ),
+                      Expanded(child: SizedBox()),
+                      Text(date)
+                    ],
+                  ),
+                ],
               ),
             ),
+          ),
 
-            // Text('Order id:         ' + text),
-            // Text('Ordered at:    ' +
-            //     date.toString()),
-            // Text('Order total:    ₹' +
-            //     order.totalCost.toString()),
-          ],
-        ),
+          // Text('Order id:         ' + text),
+          // Text('Ordered at:    ' +
+          //     date.toString()),
+          // Text('Order total:    ₹' +
+          //     order.totalCost.toString()),
+        ],
       ),
     );
   }

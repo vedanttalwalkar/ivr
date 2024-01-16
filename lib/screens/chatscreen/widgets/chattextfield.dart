@@ -5,6 +5,7 @@ class CustomChatTextField extends StatelessWidget {
   final TextEditingController controller;
   final TextInputType keyboardType;
   final void Function(String)? onChanged;
+
   CustomChatTextField(
       {required this.hintText,
         required this.controller,
@@ -13,17 +14,16 @@ class CustomChatTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60,
-      padding: EdgeInsets.all(8),
-      child: TextFormField(
-         textAlignVertical:TextAlignVertical.bottom,
+      margin: EdgeInsets.all(8),
+      child: TextField(
+        maxLines: null,
         keyboardType: keyboardType,
         controller: controller,
         onChanged: onChanged,
         textInputAction: TextInputAction.done,
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: TextStyle(fontSize: 18),
+          hintStyle: TextStyle(fontSize: 15),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(30)),
             borderSide: BorderSide(width: 1, color: Colors.grey),
