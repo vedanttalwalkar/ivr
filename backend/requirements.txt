@@ -5,6 +5,7 @@ flask
 flask-cors
 pytesseract
 langchain
+langchain_community
 accelerate
 bitsandbytes
 transformers

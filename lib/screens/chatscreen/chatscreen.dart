@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ivrapp/constants.dart';
 import 'package:ivrapp/httprequests/get_chatbot_result.dart';
-import 'package:ivrapp/screens/auth/auth_screen.dart';
+import 'package:ivrapp/screens/auth/sign_up_page.dart';
 import 'package:ivrapp/screens/chatscreen/widgets/chattextfield.dart';
 import 'package:ivrapp/screens/chatscreen/widgets/messagebox.dart';
 

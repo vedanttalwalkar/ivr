@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:ivrapp/constants.dart';
+
 class CustomTextFormField extends StatelessWidget {
   final hintText;
   final TextEditingController controller;
   final TextInputType keyboardType;
   CustomTextFormField(
       {required this.hintText,
-        required this.controller,
-        required this.keyboardType});
+      required this.controller,
+      required this.keyboardType});
 
   @override
   Widget build(BuildContext context) {

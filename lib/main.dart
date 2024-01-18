@@ -43,6 +43,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
+          primaryTextTheme:
+              TextTheme(bodyMedium: TextStyle(fontFamily: "Roboto")),
           floatingActionButtonTheme:
               FloatingActionButtonThemeData(foregroundColor: Colors.black),
           // iconButtonTheme: IconButtonThemeData(

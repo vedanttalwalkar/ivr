@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ivrapp/constants.dart';
-import 'package:ivrapp/screens/auth/auth_screen.dart';
+import 'package:ivrapp/screens/auth/sign_up_page.dart';
 import 'package:ivrapp/widgets/custom_button.dart';
 
 class WelcomeScreen extends StatelessWidget {

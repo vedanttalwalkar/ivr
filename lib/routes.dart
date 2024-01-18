@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ivrapp/model/prescription.dart';
 import 'package:ivrapp/screens/home/drawer_screens/account_screen.dart';
-import 'package:ivrapp/screens/auth/auth_screen.dart';
+import 'package:ivrapp/screens/auth/sign_up_page.dart';
 import 'package:ivrapp/screens/chatscreen/chatscreen.dart';
 import 'package:ivrapp/screens/extracted_med_list/extracted-med-list.dart';
 import 'package:ivrapp/screens/home/drawer_screens/prescriptions_screen.dart';
